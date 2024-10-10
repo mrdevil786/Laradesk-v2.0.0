@@ -15,7 +15,7 @@ class CheckAuthStatus
 
         if ($user && $user->status === 'blocked') {
             Auth::guard('web')->logout();
-            return redirect()->route('admin.view.login')->with('warning', 'Your account is blocked.');
+            return redirect()->route('admin.auth.login')->with('warning', 'Your account is blocked.');
         }
 
         return $next($request);
