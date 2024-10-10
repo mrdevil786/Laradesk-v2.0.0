@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\CheckAuthStatus;
 use App\Http\Middleware\Manager;
 use App\Http\Middleware\Member;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,7 @@ Route::middleware('guest')->group(function () {
 });
 
 // Authenticated admin routes
-Route::middleware(['auth:sanctum', 'web', 'CheckAuthStatus'])->group(function () {
+Route::middleware(['auth:sanctum', CheckAuthStatus::class])->group(function () {
 
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
