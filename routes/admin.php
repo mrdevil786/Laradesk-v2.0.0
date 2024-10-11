@@ -17,7 +17,7 @@ Route::middleware('guest')->group(function () {
 });
 
 // Authenticated admin routes
-Route::middleware(['auth:sanctum', CheckAuthStatus::class])->group(function () {
+Route::middleware([CheckAuthStatus::class])->group(function () {
 
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
