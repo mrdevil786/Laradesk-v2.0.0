@@ -20,7 +20,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth:sanctum', CheckAuthStatus::class])->group(function () {
 
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
 
     // User management routes
     Route::prefix('users')->name('users.')->controller(UserController::class)->group(function () {

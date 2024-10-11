@@ -141,7 +141,14 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a>
-                                                <a class="dropdown-item" href="{{ route('admin.auth.logout') }}">
+
+                                                <form id="logout-form" action="{{ route('admin.auth.logout') }}"
+                                                    method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
