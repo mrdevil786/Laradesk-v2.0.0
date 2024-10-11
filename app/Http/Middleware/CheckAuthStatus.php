@@ -11,13 +11,9 @@ class CheckAuthStatus
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
-            return redirect()->route('admin.auth.login')->with('warning', 'Please log in to access the admin panel.');
-        }
-
         $user = Auth::user();
 
-        if ($user->status === 'blocked') {
+        if ($user && $user->status === 'blocked') {
             Auth::guard('web')->logout();
             return redirect()->route('admin.auth.login')->with('warning', 'Your account is blocked.');
         }
