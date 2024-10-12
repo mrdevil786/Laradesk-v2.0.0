@@ -65,19 +65,19 @@
                                             </td>
                                         @endif
                                         <td class="text-center">
-                                            {{-- <x-buttons.action-pill-button iconClass="fa fa-eye" iconColor="secondary"
-                                                href="{{ route('admin.users.view', $user->id) }}" /> --}}
+                                            <x-buttons.action-pill-button iconClass="fa fa-eye" iconColor="secondary"
+                                                href="{{ route('admin.users.view', $user->id) }}" />
 
                                             @if (auth()->user()->user_role != 3)
-                                                {{-- <x-buttons.action-pill-button
+                                                <x-buttons.action-pill-button
                                                     href="{{ route('admin.users.edit', $user->id) }}"
                                                     iconClass="fa fa-pencil" iconColor="warning"
-                                                    modalTarget="editUserModal" /> --}}
+                                                    modalTarget="editUserModal" />
                                             @endif
                                             @if (auth()->user()->user_role == 1)
-                                                {{-- <x-buttons.action-pill-button
+                                                <x-buttons.action-pill-button
                                                     href="{{ route('admin.users.destroy', $user->id) }}"
-                                                    iconClass="fa fa-trash" iconColor="danger" /> --}}
+                                                    iconClass="fa fa-trash" iconColor="danger" />
                                             @endif
                                         </td>
                                     </tr>
