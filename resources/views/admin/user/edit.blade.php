@@ -74,6 +74,7 @@
                                     <label class="form-label mt-0" for="role">User Role</label>
                                     @if ($mode == 'edit' || $mode == 'create')
                                         <select class="form-select form-control" id="role" name="role">
+                                            <option value="" disabled selected hidden>Select User Role</option>
                                             <option value="1"
                                                 {{ old('role', $mode == 'edit' ? $user->user_role : '') == 1 ? 'selected' : '' }}>
                                                 Administrator</option>
@@ -105,49 +106,48 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-
-                                @if ($mode == 'edit' || $mode == 'create')
-                                    <div class="row">
-                                        <div class="col-xl-6 mb-3">
-                                            <label class="form-label">New Password</label>
-                                            <div class="input-group" id="Password-toggle1">
-                                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
-                                                    <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
-                                                </a>
-                                                <input class="form-control @error('password') is-invalid @enderror"
-                                                    type="password" name="password" placeholder="New Password"
-                                                    autocomplete="new-password">
-                                                @error('password')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-6 mb-3">
-                                            <label class="form-label">Confirm Password</label>
-                                            <div class="input-group" id="Password-toggle2">
-                                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
-                                                    <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
-                                                </a>
-                                                <input
-                                                    class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                    type="password" name="password_confirmation"
-                                                    placeholder="Confirm Password" autocomplete="new-password">
-                                                @error('password_confirmation')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        @if ($mode == 'edit')
-                                            <div class="text-center col-xl-12 mb-3">
-                                                <small class="text-muted">Leave blank to keep the current password.</small>
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endif
-
                             </div>
+
+                            @if ($mode == 'edit' || $mode == 'create')
+                                <div class="row">
+                                    <div class="col-xl-6 mb-3">
+                                        <label class="form-label mt-0">New Password</label>
+                                        <div class="input-group" id="Password-toggle1">
+                                            <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                            </a>
+                                            <input class="form-control @error('password') is-invalid @enderror"
+                                                type="password" name="password" placeholder="New Password"
+                                                autocomplete="new-password">
+                                            @error('password')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 mb-3">
+                                        <label class="form-label mt-0">Confirm Password</label>
+                                        <div class="input-group" id="Password-toggle2">
+                                            <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                            </a>
+                                            <input class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                type="password" name="password_confirmation" placeholder="Confirm Password"
+                                                autocomplete="new-password">
+                                            @error('password_confirmation')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    @if ($mode == 'edit')
+                                        <div class="text-center col-xl-12 mb-3">
+                                            <small class="text-muted">Leave blank to keep the current password.</small>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
+
                         </div>
                     </div>
 
