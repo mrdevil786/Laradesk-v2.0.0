@@ -152,8 +152,9 @@
                     </div>
 
                     @if ($mode == 'edit' || $mode == 'create')
-                        <center><button class="btn btn-primary" type="submit">{{ ucfirst($mode) }} User</button>
-                        </center>
+                        <center><x-buttons.simple-button class="btn btn-primary"
+                                type="submit">{{ $mode == 'edit' ? 'Update' : 'Create' }}
+                                User</x-buttons.simple-button></center>
                     @endif
 
                     @if ($mode == 'edit' || $mode == 'create')
