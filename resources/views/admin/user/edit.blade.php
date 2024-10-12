@@ -87,7 +87,7 @@
                         </div>
 
                         @if ($isEdit)
-                            <x-fields.input-field label="Avatar" name="avatar" type="file" />
+                            <x-inputs.input-field label="Avatar" name="avatar" type="file" />
                         @else
                             <p>{{ $user->avatar }}</p>
                         @endif
