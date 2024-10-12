@@ -34,7 +34,7 @@
 
                         <div class="col-xl-4 mb-3">
                             @if ($mode == 'edit' || $mode == 'create')
-                                <label class="form-label mt-0" for="image">Image</label>
+                                <label class="form-label mt-0" for="image">Avatar</label>
                                 <input type="file" class="dropify" name="avatar" data-bs-height="180"
                                     data-default-file="{{ $mode == 'edit' && isset($user) && $user->avatar ? asset($user->avatar) : '' }}" />
                                 @error('avatar')
