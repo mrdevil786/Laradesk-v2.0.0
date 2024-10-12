@@ -31,103 +31,123 @@
                     @endif
 
                     <div class="form-row">
-                        @if ($mode == 'edit' || $mode == 'create')
-                            <x-inputs.input-field class="col-xl-4 mb-3" label="Full Name" name="name" type="text"
-                                :value="old('name', $mode == 'edit' ? $user->name : '')" />
-                        @else
-                            <div class="col-xl-4 mb-3">
-                                <label class="form-label mt-0" for="name">Full Name</label>
-                                <p class="form-control">{{ $user->name }}</p>
-                            </div>
-                        @endif
-
-                        @if ($mode == 'edit' || $mode == 'create')
-                            <x-inputs.input-field class="col-xl-4 mb-3" label="Email" name="email" type="email"
-                                :value="old('email', $mode == 'edit' ? $user->email : '')" />
-                        @else
-                            <div class="col-xl-4 mb-3">
-                                <label class="form-label mt-0" for="email">Email</label>
-                                <p class="form-control">{{ $user->email }}</p>
-                            </div>
-                        @endif
 
                         <div class="col-xl-4 mb-3">
-                            <label class="form-label mt-0" for="role">User Role</label>
                             @if ($mode == 'edit' || $mode == 'create')
-                                <select class="form-select form-control" id="role" name="role">
-                                    <option value="1"
-                                        {{ old('role', $mode == 'edit' ? $user->user_role : '') == 1 ? 'selected' : '' }}>
-                                        Administrator</option>
-                                    <option value="2"
-                                        {{ old('role', $mode == 'edit' ? $user->user_role : '') == 2 ? 'selected' : '' }}>
-                                        Editor</option>
-                                    <option value="3"
-                                        {{ old('role', $mode == 'edit' ? $user->user_role : '') == 3 ? 'selected' : '' }}>
-                                        Viewer</option>
-                                </select>
+                                <label class="form-label mt-0" for="image">Image</label>
+                                <input type="file" class="dropify" name="avatar" data-bs-height="180"
+                                    data-default-file="{{ $mode == 'edit' && isset($user) && $user->avatar ? asset($user->avatar) : '' }}" />
+                                @error('avatar')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             @else
-                                <p class="form-control">
-                                    @switch($user->user_role)
-                                        @case(1)
-                                            Administrator
-                                        @break
-
-                                        @case(2)
-                                            Editor
-                                        @break
-
-                                        @case(3)
-                                            Viewer
-                                        @break
-                                    @endswitch
-                                </p>
+                                <div class="text-center">
+                                    <img class="img-responsive br-5" style="height: 180px;"
+                                        src="{{ asset($user->avatar ?? 'assets/profile.svg') }}" alt="User Image">
+                                </div>
                             @endif
-                            @error('role')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
                         </div>
 
-                        @if ($mode == 'edit' || $mode == 'create')
-                            <x-inputs.input-field label="Avatar" name="avatar" type="file" />
-                        @else
-                            <p>{{ $user->avatar }}</p>
-                        @endif
+                        <div class="col-xl-8">
+                            <div class="row">
+                                @if ($mode == 'edit' || $mode == 'create')
+                                    <x-inputs.input-field class="col-xl-6 mb-3" label="Full Name" name="name"
+                                        type="text" :value="old('name', $mode == 'edit' ? $user->name : '')" />
+                                @else
+                                    <div class="col-xl-6 mb-3">
+                                        <label class="form-label mt-0" for="name">Full Name</label>
+                                        <p class="form-control">{{ $user->name }}</p>
+                                    </div>
+                                @endif
 
-                        @if ($mode == 'edit' || $mode == 'create')
-                            <div class="col-xl-4 mb-3">
-                                <label class="form-label">New Password</label>
-                                <div class="input-group" id="Password-toggle1">
-                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
-                                        <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
-                                    </a>
-                                    <input class="form-control @error('password') is-invalid @enderror" type="password"
-                                        name="password" placeholder="New Password" autocomplete="new-password">
-                                    @error('password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                @if ($mode == 'edit' || $mode == 'create')
+                                    <x-inputs.input-field class="col-xl-6 mb-3" label="Email" name="email" type="email"
+                                        :value="old('email', $mode == 'edit' ? $user->email : '')" />
+                                @else
+                                    <div class="col-xl-6 mb-3">
+                                        <label class="form-label mt-0" for="email">Email</label>
+                                        <p class="form-control">{{ $user->email }}</p>
+                                    </div>
+                                @endif
+
+                                <div class="col-xl-6 mb-3">
+                                    <label class="form-label mt-0" for="role">User Role</label>
+                                    @if ($mode == 'edit' || $mode == 'create')
+                                        <select class="form-select form-control" id="role" name="role">
+                                            <option value="1"
+                                                {{ old('role', $mode == 'edit' ? $user->user_role : '') == 1 ? 'selected' : '' }}>
+                                                Administrator</option>
+                                            <option value="2"
+                                                {{ old('role', $mode == 'edit' ? $user->user_role : '') == 2 ? 'selected' : '' }}>
+                                                Editor</option>
+                                            <option value="3"
+                                                {{ old('role', $mode == 'edit' ? $user->user_role : '') == 3 ? 'selected' : '' }}>
+                                                Viewer</option>
+                                        </select>
+                                    @else
+                                        <p class="form-control">
+                                            @switch($user->user_role)
+                                                @case(1)
+                                                    Administrator
+                                                @break
+
+                                                @case(2)
+                                                    Editor
+                                                @break
+
+                                                @case(3)
+                                                    Viewer
+                                                @break
+                                            @endswitch
+                                        </p>
+                                    @endif
+                                    @error('role')
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
 
-                            <div class="col-xl-4 mb-3">
-                                <label class="form-label">Confirm Password</label>
-                                <div class="input-group" id="Password-toggle2">
-                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
-                                        <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
-                                    </a>
-                                    <input class="form-control @error('new_password_confirmation') is-invalid @enderror"
-                                        type="password" name="new_password_confirmation" placeholder="Confirm Password"
-                                        autocomplete="new-password">
-                                    @error('new_password_confirmation')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        @endif
+                                @if ($mode == 'edit' || $mode == 'create')
+                                    <div class="row">
+                                        <div class="col-xl-6 mb-3">
+                                            <label class="form-label">New Password</label>
+                                            <div class="input-group" id="Password-toggle1">
+                                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                    <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                                </a>
+                                                <input class="form-control @error('password') is-invalid @enderror"
+                                                    type="password" name="password" placeholder="New Password"
+                                                    autocomplete="new-password">
+                                                @error('password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
 
+                                        <div class="col-xl-6 mb-3">
+                                            <label class="form-label">Confirm Password</label>
+                                            <div class="input-group" id="Password-toggle2">
+                                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                    <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                                </a>
+                                                <input
+                                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                    type="password" name="password_confirmation"
+                                                    placeholder="Confirm Password" autocomplete="new-password">
+                                                @error('password_confirmation')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                            </div>
+                        </div>
                     </div>
 
                     @if ($mode == 'edit' || $mode == 'create')
-                        <center><button class="btn btn-primary" type="submit">{{ ucfirst($mode) }} User</button></center>
+                        <center><button class="btn btn-primary" type="submit">{{ ucfirst($mode) }} User</button>
+                        </center>
                     @endif
 
                     @if ($mode == 'edit' || $mode == 'create')
@@ -150,4 +170,8 @@
 
     <!-- SHOW PASSWORD JS -->
     <script src="{{ asset('../assets/js/show-password.min.js') }}"></script>
+
+    <!-- FILE UPLOADES JS -->
+    <script src="{{ asset('../assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ asset('../assets/plugins/fileuploads/js/file-upload.js') }}"></script>
 @endsection
