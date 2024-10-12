@@ -59,28 +59,25 @@
                                         <td>{{ $user->updated_at }}</td>
                                         @if (auth()->user()->user_role == 1)
                                             <td class="text-center">
-                                                <label class="custom-switch form-switch mb-0">
-                                                    <input type="checkbox" name="custom-switch-radio"
-                                                        class="custom-switch-input" data-user-id="{{ $user->id }}"
-                                                        {{ $user->status == 'active' ? 'checked' : '' }}>
-                                                    <span class="custom-switch-indicator"></span>
-                                                </label>
+                                                <x-buttons.status-switch entityType="user" entityId="{{ $user->id }}"
+                                                    status="{{ $user->status }}"
+                                                    ajaxUrl="{{ route('admin.users.status') }}" />
                                             </td>
                                         @endif
                                         <td class="text-center">
-                                            <x-buttons.action-pill-button iconClass="fa fa-eye" iconColor="secondary"
-                                                href="{{ route('admin.users.view', $user->id) }}" />
+                                            {{-- <x-buttons.action-pill-button iconClass="fa fa-eye" iconColor="secondary"
+                                                href="{{ route('admin.users.view', $user->id) }}" /> --}}
 
                                             @if (auth()->user()->user_role != 3)
-                                                <x-buttons.action-pill-button
+                                                {{-- <x-buttons.action-pill-button
                                                     href="{{ route('admin.users.edit', $user->id) }}"
                                                     iconClass="fa fa-pencil" iconColor="warning"
-                                                    modalTarget="editUserModal" />
+                                                    modalTarget="editUserModal" /> --}}
                                             @endif
                                             @if (auth()->user()->user_role == 1)
-                                                <x-buttons.action-pill-button
+                                                {{-- <x-buttons.action-pill-button
                                                     href="{{ route('admin.users.destroy', $user->id) }}"
-                                                    iconClass="fa fa-trash" iconColor="danger" />
+                                                    iconClass="fa fa-trash" iconColor="danger" /> --}}
                                             @endif
                                         </td>
                                     </tr>
@@ -95,7 +92,7 @@
     <!-- End Row -->
 
     <!--Add Modal - Right Offcanvas-->
-    <x-Modal.Right-Offcanvas title="Add New User" action="{{ route('admin.users.store') }}" method="POST">
+    {{-- <x-Modal.Right-Offcanvas title="Add New User" action="{{ route('admin.users.store') }}" method="POST">
 
         <x-fields.input-field label="Full Name" name="name" />
         <x-fields.input-field label="Email" name="email" />
@@ -104,7 +101,7 @@
         <x-fields.dropdown-field label="User Role" name="role" :options="[1 => 'Administrator', 2 => 'Editor', 3 => 'Viewer']" />
         <x-fields.input-field label="Avatar" name="avatar" type="file" />
 
-    </x-Modal.Right-Offcanvas>
+    </x-Modal.Right-Offcanvas> --}}
     <!--/Right Offcanvas-->
 
 @endsection
@@ -126,43 +123,5 @@
     <script src="{{ asset('../assets/js/table-data.js') }}"></script>
 
     <!-- INTERNAL Notifications js -->
-    <script src="../assets/plugins/notify/js/jquery.growl.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('input[name="custom-switch-radio"]').change(function() {
-                var userId = $(this).data('user-id');
-                var status = $(this).prop('checked') ? 'active' : 'blocked';
-
-                $.ajax({
-                    url: "{{ route('admin.users.status') }}",
-                    method: "PUT",
-                    data: {
-                        id: userId,
-                        status: status,
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        if (response.warning) {
-                            $.growl.warning1({
-                                title: 'Warning',
-                                message: response.warning
-                            });
-                        } else {
-                            $.growl.notice1({
-                                title: 'Success',
-                                message: response.message
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        $.growl.error1({
-                            title: 'Error',
-                            message: 'An error occurred while updating user status.'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="{{ asset('../assets/plugins/notify/js/jquery.growl.js') }}"></script>
 @endsection
