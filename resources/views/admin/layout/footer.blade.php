@@ -693,7 +693,7 @@
             if (alert) {
                 alert.remove();
             }
-        }, 2000);
+        }, 3000);
     });
 </script>
 
