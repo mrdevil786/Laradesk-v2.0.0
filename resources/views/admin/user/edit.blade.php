@@ -73,7 +73,7 @@
                                 <div class="col-xl-6 mb-3">
                                     <label class="form-label mt-0" for="role">User Role</label>
                                     @if ($mode == 'edit' || $mode == 'create')
-                                        <select class="form-select form-control" id="role" name="role">
+                                        <select class="form-control select2 form-select" id="role" name="role">
                                             <option value="" disabled selected hidden>Select User Role</option>
                                             <option value="1"
                                                 {{ old('role', $mode == 'edit' ? $user->user_role : '') == 1 ? 'selected' : '' }}>
@@ -181,4 +181,8 @@
     <!-- FILE UPLOADES JS -->
     <script src="{{ asset('../assets/plugins/fileuploads/js/fileupload.js') }}"></script>
     <script src="{{ asset('../assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+
+    <!-- SELECT2 JS -->
+    <script src="{{ asset('../assets/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('../assets/js/select2.js') }}"></script>
 @endsection
