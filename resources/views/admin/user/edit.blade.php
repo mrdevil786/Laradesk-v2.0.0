@@ -31,31 +31,25 @@
                     @endif
 
                     <div class="form-row">
-                        <div class="col-xl-4 mb-3">
-                            <label class="form-label mt-0" for="name">Full Name</label>
-                            @if ($mode == 'edit' || $mode == 'create')
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ old('name', $mode == 'edit' ? $user->name : '') }}">
-                            @else
+                        @if ($mode == 'edit' || $mode == 'create')
+                            <x-inputs.input-field class="col-xl-4 mb-3" label="Full Name" name="name" type="text"
+                                :value="old('name', $mode == 'edit' ? $user->name : '')" />
+                        @else
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label mt-0" for="name">Full Name</label>
                                 <p class="form-control">{{ $user->name }}</p>
-                            @endif
-                            @error('name')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                            </div>
+                        @endif
 
-                        <div class="col-xl-4 mb-3">
-                            <label class="form-label mt-0" for="email">Email</label>
-                            @if ($mode == 'edit' || $mode == 'create')
-                                <input type="email" class="form-control" id="email" name="email"
-                                    value="{{ old('email', $mode == 'edit' ? $user->email : '') }}">
-                            @else
+                        @if ($mode == 'edit' || $mode == 'create')
+                            <x-inputs.input-field class="col-xl-4 mb-3" label="Email" name="email" type="email"
+                                :value="old('email', $mode == 'edit' ? $user->email : '')" />
+                        @else
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label mt-0" for="email">Email</label>
                                 <p class="form-control">{{ $user->email }}</p>
-                            @endif
-                            @error('email')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                            </div>
+                        @endif
 
                         <div class="col-xl-4 mb-3">
                             <label class="form-label mt-0" for="role">User Role</label>
@@ -100,25 +94,11 @@
                         @endif
 
                         @if ($mode == 'edit' || $mode == 'create')
-                            <div class="col-xl-4 mb-3">
-                                <label class="form-label mt-0" for="password">New Password</label>
-                                <input type="password" class="form-control" id="password" name="password">
-                                @if ($mode == 'edit')
-                                    <small class="text-muted">Leave blank to keep the current password.</small>
-                                @endif
-                                @error('password')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-inputs.input-field class="col-xl-4 mb-3" label="New Password" name="password"
+                                type="password" />
 
-                            <div class="col-xl-4 mb-3">
-                                <label class="form-label mt-0" for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation"
-                                    name="password_confirmation">
-                                @error('password_confirmation')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-inputs.input-field class="col-xl-4 mb-3" label="Confirm Password"
+                                name="password_confirmation" type="password" />
                         @endif
                     </div>
 

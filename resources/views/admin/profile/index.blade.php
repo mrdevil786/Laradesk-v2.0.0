@@ -97,9 +97,9 @@
                         @csrf
 
                         <div class="row">
-                            <x-fields.input-field label="Full Name" name="name" value="{{ $user->name }}" />
-                            <x-fields.input-field label="Email" name="email" value="{{ $user->email }}" />
-                            <x-fields.input-field label="Avatar" name="avatar" type="file" />
+                            <x-inputs.input-field label="Full Name" name="name" value="{{ $user->name }}" />
+                            <x-inputs.input-field label="Email" name="email" value="{{ $user->email }}" />
+                            <x-inputs.input-field label="Avatar" name="avatar" type="file" />
                         </div>
                         <div class="card-footer text-center">
                             <button type="submit" class="btn btn-primary">Update Profile</button>
