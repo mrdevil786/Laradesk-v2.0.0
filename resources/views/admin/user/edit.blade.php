@@ -94,12 +94,36 @@
                         @endif
 
                         @if ($mode == 'edit' || $mode == 'create')
-                            <x-inputs.input-field class="col-xl-4 mb-3" label="New Password" name="password"
-                                type="password" />
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label">New Password</label>
+                                <div class="input-group" id="Password-toggle1">
+                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                        <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                    </a>
+                                    <input class="form-control @error('password') is-invalid @enderror" type="password"
+                                        name="password" placeholder="New Password" autocomplete="new-password">
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
 
-                            <x-inputs.input-field class="col-xl-4 mb-3" label="Confirm Password"
-                                name="password_confirmation" type="password" />
+                            <div class="col-xl-4 mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <div class="input-group" id="Password-toggle2">
+                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                        <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                    </a>
+                                    <input class="form-control @error('new_password_confirmation') is-invalid @enderror"
+                                        type="password" name="new_password_confirmation" placeholder="Confirm Password"
+                                        autocomplete="new-password">
+                                    @error('new_password_confirmation')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         @endif
+
                     </div>
 
                     @if ($mode == 'edit' || $mode == 'create')
@@ -118,6 +142,12 @@
 @endsection
 
 @section('custom-script')
+    <!-- INPUT MASK JS-->
     <script src="{{ asset('assets/plugins/input-mask/jquery.mask.min.js') }}"></script>
+
+    <!-- FORMVALIDATION JS -->
     <script src="{{ asset('assets/js/form-validation.js') }}"></script>
+
+    <!-- SHOW PASSWORD JS -->
+    <script src="{{ asset('../assets/js/show-password.min.js') }}"></script>
 @endsection
