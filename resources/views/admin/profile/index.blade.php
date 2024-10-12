@@ -80,7 +80,8 @@
                         </div>
 
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-primary">Change Password</button>
+                            <x-buttons.simple-button class="btn btn-primary" type="submit">Change
+                                Password</x-buttons.simple-button>
                         </div>
                     </form>
                 </div>
@@ -102,7 +103,8 @@
                             <x-inputs.input-field label="Avatar" name="avatar" type="file" />
                         </div>
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                            <x-buttons.simple-button class="btn btn-primary" type="submit">Update
+                                Profile</x-buttons.simple-button>
                         </div>
                     </form>
                 </div>
