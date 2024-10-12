@@ -25,21 +25,21 @@ Route::middleware([CheckAuthStatus::class])->group(function () {
     // User management routes
     Route::prefix('users')->name('users.')->controller(UserController::class)->group(function () {
 
-        // Routes for admins
+        // Admin routes
         Route::middleware(Admin::class)->group(function () {
-            Route::delete('/{id}', 'destroy')->name('destroy');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
             Route::put('status', 'status')->name('status');
-            Route::post('create', 'create')->name('create');
+            Route::get('/{id}', 'destroy')->name('destroy');
         });
 
-        // Routes for managers
+        // Manager routes
         Route::middleware(Manager::class)->group(function () {
-            Route::post('store', 'store')->name('store');
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::put('update/{id}', 'update')->name('update');
         });
 
-        // Routes for members
+        // Member routes
         Route::middleware(Member::class)->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('view/{id}', 'view')->name('view');
@@ -49,7 +49,7 @@ Route::middleware([CheckAuthStatus::class])->group(function () {
     // Profile routes
     Route::prefix('profile')->name('profile.')->controller(ProfileController::class)->group(function () {
 
-        // Routes for members
+        // Member routes
         Route::middleware(Member::class)->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('view/{id}', 'view')->name('view');

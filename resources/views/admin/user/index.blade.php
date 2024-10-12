@@ -8,8 +8,11 @@
     <div class="page-header">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="page-title">Manage Users</h1>
-            <button class="btn btn-primary off-canvas" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Add User</button>
+
+            @if (Auth()->User()->user_role == 1)
+                <a href="{{ route('admin.users.create') }}"><x-buttons.simple-button class="btn btn-primary" type="button">Add
+                        User</x-buttons.simple-button></a>
+            @endif
         </div>
     </div>
     <!-- PAGE-HEADER END -->
@@ -90,19 +93,6 @@
         </div>
     </div>
     <!-- End Row -->
-
-    <!--Add Modal - Right Offcanvas-->
-    {{-- <x-Modal.Right-Offcanvas title="Add New User" action="{{ route('admin.users.store') }}" method="POST">
-
-        <x-fields.input-field label="Full Name" name="name" />
-        <x-fields.input-field label="Email" name="email" />
-        <x-fields.input-field label="Password" name="password" type="password" />
-        <x-fields.input-field label="Confirm Password" name="password_confirmation" type="password" />
-        <x-fields.dropdown-field label="User Role" name="role" :options="[1 => 'Administrator', 2 => 'Editor', 3 => 'Viewer']" />
-        <x-fields.input-field label="Avatar" name="avatar" type="file" />
-
-    </x-Modal.Right-Offcanvas> --}}
-    <!--/Right Offcanvas-->
 
 @endsection
 

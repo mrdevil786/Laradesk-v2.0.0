@@ -20,7 +20,24 @@ class UserController extends Controller
     // CREATE PAGE FOR A SPECIFIC USER
     public function create()
     {
-        return view('admin.user.create');
+        $mode = 'create';
+        return view('admin.user.edit', compact('mode'));
+    }
+
+    // FIND A SPECIFIC USER AND SHOW THE EDIT FORM
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        $mode = 'edit';
+        return view('admin.user.edit', compact('mode', 'user'));
+    }
+
+    // VIEW A SPECIFIC USER
+    public function view($id)
+    {
+        $user = User::findOrFail($id);
+        $mode = 'view';
+        return view('admin.user.edit', compact('mode', 'user'));
     }
 
     // VALIDATE AND STORE A NEW USER
@@ -50,22 +67,6 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User registered successfully!');
     }
 
-    // FIND A SPECIFIC USER AND SHOW THE EDIT FORM
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        $isEdit = true;
-        return view('admin.user.edit', compact('user', 'isEdit'));
-    }
-
-    // VIEW A SPECIFIC USER
-    public function view($id)
-    {
-        $user = User::findOrFail($id);
-        $isEdit = false;
-        return view('admin.user.edit', compact('user', 'isEdit'));
-    }
-
     // UPDATE A USER'S DETAILS
     public function update(Request $request)
     {
@@ -74,6 +75,8 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $request->id,
             'role' => 'required|in:1,2,3',
             'avatar' => 'mimes:png,jpg,jpeg,webp,svg,gif',
+            'password' => 'nullable|min:4|confirmed',
+            'password_confirmation' => 'nullable|min:4',
         ]);
 
         $user = User::findOrFail($request->id);
@@ -82,6 +85,10 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->user_role = $request->role;
 
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
         if ($request->hasFile('avatar')) {
             $user->avatar = FileUploader::uploadFile($request->file('avatar'), 'images/admin-avatar', $user->avatar);
         }
@@ -89,24 +96,6 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully!');
-    }
-
-    // UPDATE USER'S STATUS (ACTIVE OR BLOCKED)
-    public function status(Request $request)
-    {
-        $request->validate([
-            'id' => 'required|numeric|exists:users,id',
-            'status' => 'required|in:active,blocked',
-        ]);
-
-        $user = User::findOrFail($request->id);
-
-        if ($user->user_role != 1) {
-            $user->update(['status' => $request->status]);
-            return response()->json(['message' => 'User status updated successfully']);
-        } else {
-            return response()->json(['warning' => 'Cannot update status for administrator']);
-        }
     }
 
     // DELETE A USER
