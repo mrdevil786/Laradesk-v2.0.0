@@ -27,7 +27,7 @@
                                     data-bs-image-src="{{ asset($user->avatar ?? 'assets/profile.svg') }}"></span>
                             </div>
                             <div>
-                                <a href="profile.html">
+                                <a href="javascript:void(0)">
                                     <h5 class="mb-1 text-dark fw-semibold">{{ $user->name }}</h5>
                                 </a>
                             </div>
