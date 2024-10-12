@@ -138,6 +138,12 @@
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        @if ($mode == 'edit')
+                                            <div class="text-center col-xl-12 mb-3">
+                                                <small class="text-muted">Leave blank to keep the current password.</small>
+                                            </div>
+                                        @endif
                                     </div>
                                 @endif
 
