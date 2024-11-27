@@ -98,6 +98,24 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully!');
     }
 
+    // UPDATE USER'S STATUS (ACTIVE OR BLOCKED)
+    public function status(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|numeric|exists:users,id',
+            'status' => 'required|in:active,blocked',
+        ]);
+
+        $user = User::findOrFail($request->id);
+
+        if ($user->user_role != 1) {
+            $user->update(['status' => $request->status]);
+            return response()->json(['message' => 'User status updated successfully']);
+        } else {
+            return response()->json(['warning' => 'Cannot update status for administrator']);
+        }
+    }
+
     // DELETE A USER
     public function destroy($id)
     {

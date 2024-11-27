@@ -71,13 +71,13 @@
                                             <x-buttons.action-pill-button iconClass="fa fa-eye" iconColor="secondary"
                                                 href="{{ route('admin.users.view', $user->id) }}" />
 
-                                            @if (auth()->user()->user_role != 3)
+                                            @if (auth()->user()->user_role != 3 && $user->user_role != 1)
                                                 <x-buttons.action-pill-button
                                                     href="{{ route('admin.users.edit', $user->id) }}"
                                                     iconClass="fa fa-pencil" iconColor="warning"
                                                     modalTarget="editUserModal" />
                                             @endif
-                                            @if (auth()->user()->user_role == 1)
+                                            @if (auth()->user()->user_role == 1 && $user->user_role != 1)
                                                 <x-buttons.action-pill-button
                                                     href="{{ route('admin.users.destroy', $user->id) }}"
                                                     iconClass="fa fa-trash" iconColor="danger" />
